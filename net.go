@@ -14,9 +14,7 @@ type NetworkDevice struct {
 
 // NewNetworkDevice creates a QEMU network
 // device
-func NewNetworkDevice(deviceType, id string) (NetworkDevice, error) {
-	var netdev NetDev
-
+func NewNetworkDevice(deviceType, id string) (netdev NetworkDevice, error) {
 	if deviceType != "user" && deviceType != "tap" {
 		return netdev, fmt.Errorf("Unsupported netdev type")
 	}
