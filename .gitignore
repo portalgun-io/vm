@@ -1,0 +1,7 @@
+# Project Binaries
+examples/image/image
+examples/machine/machine
+
+# Vim
+*.swo
+*.swp
