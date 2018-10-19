@@ -26,12 +26,12 @@ type VirtualMachine struct {
 	//Networking []NetworkDevice
 }
 
-func NewVM(cores int, memory uint64) (machine Machine) {
-	machine.Cores = cores
-	machine.Memory = memory
-	machine.DiskDevices = make([]DiskDevice, 0)
+func NewVM(cores int, memory uint64) (vm VirtualMachine) {
+	vm.Cores = cores
+	vm.Memory = memory
+	vm.DiskDevices = make([]DiskDevice, 0)
 
-	return machine
+	return vm
 }
 
 // TODO: Is this attaching the device or inserting the disk? These should be separate
@@ -43,14 +43,14 @@ func (vm *VirtualMachine) AttachCDRom(device string) {
 // AddDrive attaches a new hard drive to
 // the virtual machine
 //TODO: Should it not be insert disk? Or at least .AttachDiskDevice()
-func (vm *VirtualMachine) AttachDiskDevice(d Disk) {
-	vm.drives = append(vm.Disks, d)
+func (vm *VirtualMachine) AttachDiskDevice(d DiskDevice) {
+	vm.DiskDevices = append(vm.DiskDevices, d)
 }
 
 // AddDriveImage attaches the specified Image to
 // the virtual machine
 func (vm *VirtualMachine) AddDiskImage(i Image) {
-	vm.Disks = append(vm.Disks, Disk{i.Path, i.Format})
+	vm.DiskDevices = append(vm.DiskDevices, DiskDevice{i.Path, i.Format})
 }
 
 func (vm *VirtualMachine) AttachNetworkDevice(netdev NetworkDevice) {
@@ -58,7 +58,7 @@ func (vm *VirtualMachine) AttachNetworkDevice(netdev NetworkDevice) {
 }
 
 func (vm *VirtualMachine) SetDisplay(mode string) {
-	vm.display = mode
+	vm.Display = mode
 }
 
 // AddVNC attaches a VNC server to
