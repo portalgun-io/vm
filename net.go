@@ -9,7 +9,7 @@ type NetworkDevice struct {
 	ID   string // Netdev ID
 
 	Name string // TAP: interface name
-	MAC    string // TAP: Interface hardware address
+	MAC  string // TAP: Interface hardware address
 }
 
 // NewNetworkDevice creates a QEMU network

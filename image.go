@@ -45,32 +45,28 @@ type Snapshot struct {
 
 // NewImage constructs a new Image data structure based
 // on the specified parameters
-func NewImage(path, format string, size uint64) Image {
-	var img Image
-	img.Path = path
-	img.Format = format
-	img.Size = size
-
-	return img
+func NewImage(path, format string, size uint64) (i Image) {
+	i.Path = path
+	i.Format = format
+	i.Size = size
+	return i
 }
 
 // OpenImage retreives the information of the specified image
 // file into an Image data structure
-func OpenImage(path string) (Image, error) {
-	var img Image
-
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		return img, err
+func OpenImage(path string) (i Image, err error) {
+	if _, err = os.Stat(path); os.IsNotExist(err) {
+		return i, err
 	}
 
-	img.Path = path
+	i.Path = path
 
-	err := img.retreiveInfos()
+	err = i.retreiveInfos()
 	if err != nil {
-		return img, err
+		return i, err
 	}
 
-	return img, nil
+	return i, nil
 }
 
 func (i *Image) retreiveInfos() error {

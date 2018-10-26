@@ -4,15 +4,19 @@ import (
 	"fmt"
 	"log"
 
+	. "github.com/portalgun-io/vm/constants"
 	qemu "github.com/portalgun-io/vm"
 )
 
-const (
-	GiB = 1073741824 // 1 GiB = 2^30 bytes
-)
+func main() {
+	fmt.Println("Example working with images using qemu-img")
+
+	create()
+	snapshots()
+}
 
 func snapshots() {
-	img, err := qemu.OpenImage("debian.qcow2")
+	img, err := qemu.OpenImage("vm.qcow2")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -35,8 +39,8 @@ func snapshots() {
 }
 
 func create() {
-	img := qemu.NewImage("vm.qcow2", qemu.ImageFormatQCOW2, 5*GiB)
-	img.SetBackingFile("debian.qcow2")
+	img := qemu.NewImage("vm.qcow2", qemu.ImageFormatQCOW2, 5 * Gigabyte)
+	img.SetBackingFile("vm.qcow2")
 
 	err := img.Create()
 	if err != nil {
@@ -44,7 +48,3 @@ func create() {
 	}
 }
 
-func main() {
-	create()
-	snapshots()
-}

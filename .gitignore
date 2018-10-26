@@ -1,4 +1,5 @@
 # Project Binaries
+cmd/portalgun/portalgun
 examples/image/image
 examples/machine/machine
 
